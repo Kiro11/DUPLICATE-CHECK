@@ -255,3 +255,82 @@ gap: 8px;
 border-color: var(--ink);
 background: var(--paper-dim);
 }
+
+/* --- result / stamp --- */
+.result-msg{
+font-family: 'Inter', sans-serif
+font-size: 13.5px
+line-height: 1.55;
+  margin: 4px 0 14px;
+}
+.result-why{
+  font-size: 12px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin: 0 0 18px;
+}
+.result-why b{ color: var(--ink); font-weight: 600; }
+.stamp{
+  display: inline-block;
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border: 4px solid currentColor;
+  border-radius: 6px;
+  transform: rotate(-6deg);
+  mix-blend-mode: multiply;
+  margin: 6px 0 16px;
+  animation: stamp-down 0.35s cubic-bezier(.2,1.4,.4,1);
+}
+@keyframes stamp-down{
+  from{ opacity: 0; transform: rotate(-6deg) scale(1.6); }
+  to{ opacity: 1; transform: rotate(-6deg) scale(1); }
+}
+.stamp.buy{ color: var(--clarity-ink); }
+.stamp.wait{ color: var(--caution-ink); }
+.stamp.skip{ color: var(--impulse-ink); }
+
+.actions{
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+.actions button{
+  flex: 1;
+  padding: 10px 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  cursor: pointer;
+}
+.actions button:hover{ background: var(--ink); color: var(--paper); }
+.barcode{
+ height: 32px;
+  margin: 18px 0 10px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--ink) 0px, var(--ink) 2px,
+    transparent 2px, transparent 5px,
+    var(--ink) 5px, var(--ink) 6px,
+    transparent 6px, transparent 10px,
+    var(--ink) 10px, var(--ink) 13px,
+    transparent 13px, transparent 15px,
+    var(--ink) 15px, var(--ink) 16px,
+    transparent 16px, transparent 20px
+  );
+  background-repeat: repeat-x;
+  opacity: 0.85;
+
+
+
+
+
+
+}
