@@ -3,175 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Regret Recipt _ Should you actually buy that?
-</title>
-<meta name="description" content="Answer six honest questions and watch your verdict print, 
-recipt-style,before you check out.">
+<title>Regret Receipt — should you actually buy that?</title>
+<meta name="description" content="Answer six honest questions and watch your verdict print, receipt-style, before you check out.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <div class="scene">
-  <p class="kicker">Regret Recipt</p>
-  <h1 class="headline">Before you buy it-</h1>
- <p class="sub">Answer six honest questions. Watch your verdict print, 
-    right on the receipt.</p>
+  <p class="kicker">Regret Receipt</p>
+  <h1 class="headline">Before you buy it—</h1>
+  <p class="sub">Answer six honest questions. Watch your verdict print, right on the receipt.</p>
 
+  <div class="receipt-wrap">
+    <div class="receipt" id="receipt">
 
+      <p class="store">REGRET RECEIPT CO.</p>
+      <p class="meta" id="meta">— · —</p>
+      <hr class="rule">
 
-<div class="recipt-wrap">
-  <div class="recipt" id="recipt">
-      
-    <p class="store">REGRET RECEIPT CO.</p>
-<p  class="meta" id="meta">— · —</p>
-<hr class="rule">
+      <div class="field" id="itemField">
+        <label for="itemInput">Item</label>
+        <input id="itemInput" type="text" placeholder="what's in your cart?" autocomplete="off" maxlength="60">
+      </div>
+      <div class="field" id="priceField">
+        <label for="priceInput">Price</label>
+        <input id="priceInput" type="text" inputmode="decimal" placeholder="optional — e.g. 45 or £45" autocomplete="off" maxlength="20">
+      </div>
 
-     <div class="field" id="itemField">
-         <label for="itemInput"></label>
-<input id="itemInput" type="text" placeholder="what's in your cart?"
-autocomplete="off" maxlength="60">
-     </div>
- <hr class="rule dashed">
- <div class="tape" id="tape"></div>
- 
+      <hr class="rule dashed">
 
- <div id="stage">
+      <div class="tape" id="tape"></div>
 
-    <button class="start-bth" id="startBtn">Start the check→</button>
- </div>
- <div class="barcode"></div>
- <p class="tagline" id="tagline">no purchases were made in the making of this receipt</p>
+      <div id="stage">
+        <button class="start-btn" id="startBtn">Start the check →</button>
+      </div>
 
+      <div class="barcode"></div>
+      <p class="tagline" id="tagline">no purchases were made in the making of this receipt</p>
+    </div>
   </div>
+
+  <p class="disclaimer">Not financial advice — just a sixty-second gut check before checkout.</p>
 </div>
-<p class="disclaimer">Not financial advice _ just a sixty-second gut check before checkout.
-</p>
-</div>
+
 <script src="script.js" defer></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
-
-
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </html>
