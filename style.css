@@ -327,10 +327,29 @@ line-height: 1.55;
   );
   background-repeat: repeat-x;
   opacity: 0.85;
-
-
-
-
-
-
+}
+.tagline{
+  text-align: center;
+  font-size: 10.5px;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  margin: 0 0 20px;
+}
+.disclaimer{
+text-align: center;
+font-family: 'Inter', sans-serif;
+font-style: italic;
+font-size: 10.5px;
+color: #b0b0b0;
+margin: 22px 0 0;
+max-width: 320px;
+}
+button:focus-visible,
+input:focus-visible{
+outline: 2px solid var(--clarity);
+outline-offset: 2px;
+}
+@media (max-width: 420px){
+body{padding: 44px 14px 60px; }
+.recipt{ padding: 25px 18px 6px; }
 }
