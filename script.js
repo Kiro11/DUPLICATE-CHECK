@@ -69,3 +69,119 @@ tag: 'Q6 · OUTSIDE VIEW',
     tagline: document.getElementById('tagline'),
     receipt: document.getElementById('receipt')
   };
+let qIndex = 0;
+let answers = [];
+const receiptNo = Math.floor(1000 + Math.random()* 8999);
+
+function stampMeta() {
+const now = new Data();
+ const date = now.toLocaleDateString(undefined, { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase();
+    const time = now.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+    el.meta.textContent = date + ' · ' + time + ' · NO. ' + receiptNo;
+  }
+stampMeta();
+  el.itemInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') { e.preventDefault(); el.priceInput.focus(); }
+  });
+  el.priceInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') { e.preventDefault(); start(); }
+  });
+
+  el.startBtn.addEventListener('click', start);
+
+  function start() {
+    const item = el.itemInput.value.trim();
+    if (!item) {
+      el.itemInput.classList.add('error');
+      el.itemInput.focus();
+      el.itemInput.addEventListener('animationend', function () {
+        el.itemInput.classList.remove('error');
+      }, { once: true });
+      return;
+    }
+
+    el.itemInput.disabled = true;
+    el.priceInput.disabled = true;
+    el.itemField.classList.add('locked');
+    el.priceField.classList.add('locked');
+    el.tagline.textContent = 'checking the impulse, one line at a time';
+
+    qIndex = 0;
+    answers = [];
+    renderQuestion();
+  }
+
+  function renderQuestion() {
+    const q = QUESTIONS[qIndex];
+    const wrap = document.createElement('div');
+
+    const tag = document.createElement('p');
+    tag.className = 'q-tag';
+    tag.textContent = q.tag + ' · ' + (qIndex + 1) + '/' + QUESTIONS.length;
+    wrap.appendChild(tag);
+
+    const prompt = document.createElement('p');
+    prompt.className = 'q-prompt';
+    prompt.textContent = q.prompt;
+    wrap.appendChild(prompt);
+
+    const opts = document.createElement('div');
+    opts.className = 'q-options';
+    q.options.forEach(function (opt) {
+      const btn = document.createElement('button');
+      btn.className = 'q-option';
+      btn.type = 'button';
+      btn.textContent = opt.label;
+      btn.addEventListener('click', function () { answer(q, opt); });
+      opts.appendChild(btn);
+    });
+    wrap.appendChild(opts);
+
+    el.stage.replaceChildren(wrap);
+}
+function answer(question, option) {
+    answers.push(option);
+    printLine(question.tag.split(' · ')[0], option.label, option.value, false);
+    qIndex++;
+    if (qIndex < QUESTIONS.length) {
+      renderQuestion();
+    } else {
+      finish();
+    }
+  }
+
+  function printLine(tagShort, text, pts, isTotal) {
+    const line = document.createElement('div');
+    line.className = 'line' + (isTotal ? ' total' : '');
+
+    const tagEl = document.createElement('span');
+    tagEl.className = 'line-tag';
+    tagEl.textContent = tagShort;
+
+    const aEl = document.createElement('span');
+    aEl.className = 'line-a';
+    aEl.textContent = text;
+
+    const ptsEl = document.createElement('span');
+    ptsEl.className = 'line-pts';
+    ptsEl.textContent = (pts === '' ? '' : (pts > 0 ? '+' + pts : String(pts)));
+
+    line.appendChild(tagEl);
+    line.appendChild(aEl);
+    line.appendChild(ptsEl);
+    el.tape.appendChild(line);
+  }
+function getVerdict(score) {
+if(score <=2){
+return { key: 'buy', label: 'Buy it', msg: 'this reads like a plan, not an impluse.Go ahead.'};
+}
+  if (score <= 6) {
+      return { key: 'wait', label: 'Wait 24h', msg: "Nothing's wrong with it — but sleep on it. Revisit tomorrow with a clear head." };
+    }
+    return { key: 'skip', label: 'Skip it', msg: 'Most signs point to impulse, not need. Close the tab.' };
+  }
+
+
+
+
+
