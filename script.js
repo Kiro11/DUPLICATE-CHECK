@@ -181,6 +181,117 @@ return { key: 'buy', label: 'Buy it', msg: 'this reads like a plan, not an implu
     return { key: 'skip', label: 'Skip it', msg: 'Most signs point to impulse, not need. Close the tab.' };
   }
 
+  function finish() {
+    const score = answers.reduce(function (s, a) { return s + a.value; }, 0);
+    const verdict = getVerdict(score);
+
+    printLine('TOTAL', 'Impulse heat', '', true);
+    const totalLine = el.tape.lastElementChild;
+    totalLine.querySelector('.line-pts').textContent = score + '/' + MAX_SCORE;
+
+    const heatTrack = document.createElement('div');
+    heatTrack.className = 'heat-track';
+    const heatFill = document.createElement('div');
+    heatFill.className = 'heat-fill';
+    heatFill.style.background = 'var(--' + (verdict.key === 'buy' ? 'clarity' : verdict.key === 'wait' ? 'caution' : 'impulse') + ')';
+    heatTrack.appendChild(heatFill);
+    el.tape.appendChild(heatTrack);
+    requestAnimationFrame(function () {
+      heatFill.style.width = Math.round((score / MAX_SCORE) * 100) + '%';
+    });
+
+    const wrap = document.createElement('div');
+
+    const stamp = document.createElement('div');
+    stamp.className = 'stamp ' + verdict.key;
+    stamp.textContent = verdict.label;
+    wrap.appendChild(stamp);
+
+    const msg = document.createElement('p');
+    msg.className = 'result-msg';
+    msg.textContent = verdict.msg;
+    wrap.appendChild(msg);
+
+    const flags = answers
+      .map(function (a, i) { return Object.assign({}, a, { order: i }); })
+      .filter(function (a) { return a.value > 0; })
+      .sort(function (a, b) { return b.value - a.value || a.order - b.order; })
+      .slice(0, 3)
+      .map(function (a) { return a.flag; });
+
+    const why = document.createElement('p');
+    why.className = 'result-why';
+    if (flags.length === 0) {
+      why.innerHTML = '<b>No red flags at all</b> — every answer pointed to a clear decision.';
+    } else {
+      why.innerHTML = '<b>Mostly because:</b> ' + flags.join('; ') + '.';
+    }
+   
+
+
+    wrap.appendChild(Why);
+
+    const actions = document.createElement('div');
+    actions.className = 'actions';
+
+    const copyBtn = document.createElement('button');
+    copyBtn.type = 'button';
+    copyBtn.textContent = 'Copy verdict';
+    copyBtn.addEventListener('click', function () { copyVerdict(copyBtn, verdict, score); });
+    actions.appendChild(copyBtn);
+
+    const resetBtn = document.createElement('button');
+    resetBtn.type = 'button';
+    resetBtn.textContent = 'New receipt';
+    resetBtn.addEventListener('click', reset);
+    actions.appendChild(resetBtn);
+
+    wrap.appendChild(actions);
+    el.stage.replaceChildren(wrap);
+    el.tagline.textContent = 'thanks for shopping mindfully';
+  }
+
+  function copyVerdict(btn, verdict, score) {
+    const item = el.itemInput.value.trim();
+    const price = el.priceInput.value.trim();
+    const lines = [
+      'REGRET RECEIPT',
+      'Item: ' + item + (price ? '  ·  Price: ' + price : ''),
+      'Verdict: ' + verdict.label + '  (' + score + '/' + MAX_SCORE + ')',
+      verdict.msg
+    ];
+    const text = lines.join('\n');
+
+    const done = function () {
+      const original = btn.textContent;
+      btn.textContent = 'Copied';
+      setTimeout(function () { btn.textContent = original; }, 1400);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(function () { fallbackCopy(text, done); });
+    } else {
+      fallbackCopy(text, done);
+    }
+  }
+
+  function fallbackCopy(text, done) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand('copy');
+      done();
+    } catch (e) {
+    }
+    document.body.removeChild(ta);
+  }
+
+
+
 
 
 
