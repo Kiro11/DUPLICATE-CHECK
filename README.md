@@ -13,5 +13,7 @@ I did about 90% of the HTML myself, 75% of the CSS, and 65% of the JS. This was 
 For debugging, I would find my errors by opening the console, take the errors I got, and give them to Claude, and it helped me figure out the solution, since like I said, I'm not great at JavaScript yet and I'm still learning it. One good thing is that with every project, the percentage of AI help I need keeps getting lower, which I think is a good sign for me.
 
 Also, this project didn't take long to build — about 4 hours and a bit. Like I said, AI helped me with about 35% of it in total, because JavaScript was new to me. Hopefully, with more practice, that percentage keeps going down in the future.
+last note! "In the end, I found a few HTML mistakes that were preventing the JavaScript from running. I saw the errors and fixed them, and finally we cleaned up the code a bit more so it looks neat. No cheating happened at all — if you check the commit, you'll find it's the exact same code I put in two days ago, with a very minor difference after fixing the bugs, just cleaner-looking, nothing more."
+
 
 I hope you like the project. Thank you, Hack Club!
